@@ -1,0 +1,12 @@
+[package]
+name = "advent_of_code"
+version = "0.1.0"
+authors = ["Youssef Habri <youssef.habri@gmail.com>"]
+edition = "2018"
+
+[profile.release]
+opt-level = 3
+lto = true
+
+[dependencies]
+rayon = "1.2.1"
