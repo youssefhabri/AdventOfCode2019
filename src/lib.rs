@@ -1,3 +1,6 @@
+mod intcode_vm;
+pub use intcode_vm::{IntcodeVM, VMState};
+
 #[cfg(test)]
 mod tests {
     #[test]
