@@ -7,10 +7,10 @@ fn main() {
         .enumerate()
         .map(|(i, opcode)| {
             opcode
-                .parse::<i32>()
+                .parse::<i64>()
                 .unwrap_or_else(|_| panic!("Valid int at {}", i + 1))
         })
-        .collect::<Vec<i32>>();
+        .collect::<Vec<i64>>();
 
     let mut amps = vec![IntcodeVM::new(); 5];
 
@@ -38,7 +38,7 @@ fn main() {
                         println!("Settings: {:?}; Output: {}", settings, prev_output);
                         break 'outer;
                     }
-                    VMState::AwaitsInput => amps[index].push_input(prev_output),
+                    VMState::NeedsInput => amps[index].push_input(prev_output),
                     VMState::Output(output) => {
                         prev_output = output;
                         break;
@@ -53,9 +53,9 @@ fn main() {
     print!("{}", highest_output);
 }
 
-fn generate_combinations(start: i32, end: i32) -> Vec<Vec<i32>> {
+fn generate_combinations(start: i64, end: i64) -> Vec<Vec<i64>> {
     let mut combinations = vec![];
-    let range = (start..(end + 1)).collect::<Vec<i32>>();
+    let range = (start..(end + 1)).collect::<Vec<i64>>();
     for a in range.clone() {
         for b in range.clone().into_iter().filter(|i| *i != a) {
             for c in range.clone().into_iter().filter(|i| *i != a && *i != b) {
